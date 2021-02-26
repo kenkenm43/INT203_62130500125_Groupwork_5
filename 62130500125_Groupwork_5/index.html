@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Photo Gallery</title>
+    <!-- https://google.github.io/material-design-icons/#icon-font-for-the-web -->
+    <!-- Using via Google Web Fonts -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <!-- https://tailwindcss.com/docs/installation -->
+    <!-- Using Tailwind via CDN -->
+    <link
+      href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+    <!-- https://v3.vuejs.org/guide/installation.html#release-notes -->
+    <!-- Vue CDN -->
+    <script
+      src="https://kit.fontawesome.com/ffb5cefdd9.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/vue@next"></script>
+  </head>
+  <body>
+    <div id="app" class="md:mx-auto border-4 flex md:flex-col">
+      <div class="border-4 border-black px-60">
+        <div class="text-3xl font-bold ml-72">
+          Photo Gallery({{ countUndone }})
+        </div>
+        <photo-search :form="form"></photo-search>
+        <photo-view :model="model"></photo-view>
+        <div v-if="searching.length !== 0" v-for="(obj,index) in searching">
+          <photo-item @pic="pic" :obj="obj"></photo-item>
+        </div>
+        <div
+          v-else
+          class="mt-10 bg-white shadow-lg rounded w-full mx-auto px-auto py-5 flex justify-center"
+        >
+          <h2 class="mb-2 text-2xl font-bold text-gray-800">No Photos.</h2>
+        </div>
+      </div>
+    </div>
+
+    <!-- my main.js -->
+    <script src="./main.js"></script>
+    <script src="./components/PhotoItem.js"></script>
+    <script src="./components/PhotoSearch.js"></script>
+    <script src="./components/PhotoView.js"></script>
+
+    <script>
+      const mountedApp = app.mount("#app");
+    </script>
+  </body>
+</html>
